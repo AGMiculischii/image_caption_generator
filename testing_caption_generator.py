@@ -5,8 +5,11 @@ from keras.models import load_model
 from pickle import load
 import numpy as np
 from PIL import Image
+#import matplotlib.pyplot as plt
 import argparse
 import cv2
+from gtts import gTTS 
+import os
 
 
 ap = argparse.ArgumentParser()
@@ -55,10 +58,11 @@ def generate_desc(model, tokenizer, photo, max_length):
     return in_text
 
 
+#path = 'Flicker8k_Dataset/111537222_07e56d5a30.jpg'
 max_length = 32
 
 tokenizer = load(open("tokenizer.p","rb"))
-model = load_model('models/model_2.h5')
+model = load_model('models/model_0.h5')
 xception_model = Xception(include_top=False, pooling="avg")
 
 photo = extract_features(img_path, xception_model)
@@ -67,9 +71,12 @@ img = cv2.imread(img_path)
 
 description = generate_desc(model, tokenizer, photo, max_length)
 print("\n\n")
-print(description)
+print(description[6:-3])
+speech = gTTS(text = description[6:-3], lang = 'en', slow = False)
+speech.save("text.mp3")
+os.system("start text.mp3")
 
-cv2.imshow("Foto", img)
+cv2.imshow(description[6:-3], img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
