@@ -10,6 +10,7 @@ import argparse
 import cv2
 from gtts import gTTS 
 import os
+import pyttsx3  
 
 
 ap = argparse.ArgumentParser()
@@ -72,11 +73,21 @@ img = cv2.imread(img_path)
 description = generate_desc(model, tokenizer, photo, max_length)
 print("\n\n")
 print(description[6:-3])
+
+""" #ispolizovanie golosovoro ozvucivanie teksta cerez modul GTTS
 speech = gTTS(text = description[6:-3], lang = 'en', slow = False)
 speech.save("text.mp3")
-os.system("start text.mp3")
+os.system("start text.mp3") """
+
 
 cv2.imshow(description[6:-3], img)
+
+
+#ispolizovanie golosovoro ozvucivanie teksta cerez modul pyttsx3
+s = pyttsx3.init()  
+s.say(description[6:-3])  
+s.runAndWait()
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
