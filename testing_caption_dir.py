@@ -25,7 +25,6 @@ print(currentDirectory)
 currentPattern = "*.jpg"
 print("\n\n")
 f = open('spisok.txt','w')
-# работа с файлом
 
 for currentFile in currentDirectory.glob(currentPattern):  
     img_path = '.\\'+str(currentFile)
