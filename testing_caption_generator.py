@@ -63,7 +63,7 @@ def generate_desc(model, tokenizer, photo, max_length):
 max_length = 32
 
 tokenizer = load(open("tokenizer.p","rb"))
-model = load_model('models/model_0.h5')
+model = load_model('models/model_1.h5')
 xception_model = Xception(include_top=False, pooling="avg")
 
 photo = extract_features(img_path, xception_model)
@@ -74,10 +74,10 @@ description = generate_desc(model, tokenizer, photo, max_length)
 print("\n\n")
 print(description[6:-3])
 
-""" #ispolizovanie golosovoro ozvucivanie teksta cerez modul GTTS
+"""  #ispolizovanie golosovoro ozvucivanie teksta cerez modul GTTS
 speech = gTTS(text = description[6:-3], lang = 'en', slow = False)
 speech.save("text.mp3")
-os.system("start text.mp3") """
+os.system("start text.mp3")  """
 
 
 cv2.imshow(description[6:-3], img)
