@@ -58,9 +58,9 @@ if param == '-d':
     for currentFile in currentDirectory.glob(currentPattern):  
         img_path = '.\\'+str(currentFile)
         photo = extract_features(img_path, xception_model)
-        img = cv2.imread(img_path)
+        #img = cv2.imread(img_path)
         description = generate_desc(model, tokenizer, photo, max_length)
-        text_foto = str(img_path[len(args['dir'])+1:]+"  "+description[6:-3])
+        text_foto = str(img_path[len(args['dir'])+3:]+"  "+description[6:-3])
         print(text_foto)
         f.write(text_foto+"\n")
     f.close()
